@@ -1,7 +1,4 @@
-/* Password Criteria:
-1. Number of Characters
-2. Types of Characters (uppercase, lowercase, number, symbol) */
-
+// object holding password character arrays
 var characters = {
   upperCase: [
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"
@@ -14,9 +11,29 @@ var characters = {
   ],
   specialChar: [
     "~", "`", "!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "_", "-", "+", "=", "{", "[", "}", "]", "|", "\\", ":", ";", '"', "'", "<", ",", ">", ".", "?", "/"
-  ],
-  
+  ]
+};
+
+// user input variables
+var getPasswordLength = function() { 
+  var passwordLength = prompt("How many characters would you like your password to be?");
+  passwordLength = parseInt(passwordLength);
+  while (!(passwordLength >= 8 && passwordLength <= 128)) {
+    window.alert("Please enter a number between 8 and 128.");
+    passwordLength = prompt("How many characters would you like your password to be?");
+    passwordLength = parseInt(passwordLength);
+  }
+  return passwordLength;
+};
+
+var userInput = {
+  length: getPasswordLength(),
+  upperCaseConfirm: window.confirm("Would you like to use upper case letters in your password?"),
+  lowerCaseConfirm: window.confirm("Would you like to use lower case letters in your password?"),
+  numberConfirm: window.confirm("Would you like to use numbers in your password?"),
+  specialCharConfirm: window.confirm("Would you like to use special characters in your password?")
 }
+
 
 
 // Get references to the #generate element
