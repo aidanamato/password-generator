@@ -39,7 +39,9 @@ function writePassword() {
 
     function getUpperCase() {
       var upperCasePrompt = prompt('Would you like to use uppercase letters in your password? Enter "yes" or "no".');
-      upperCasePrompt = upperCasePrompt.toLowerCase();
+      if (upperCasePrompt) {
+        upperCasePrompt = upperCasePrompt.toLowerCase();
+      }
       while (!(upperCasePrompt === "yes" || upperCasePrompt === "no")) {
         window.alert("Please enter a valid response.");
         upperCasePrompt = prompt('Would you like to use uppercase letters in your password? Enter "yes" or "no".');
@@ -50,7 +52,9 @@ function writePassword() {
 
     function getLowerCase() {
       var lowerCasePrompt = prompt('Would you like to use lowercase letters in your password? Enter "yes" or "no".');
-      lowerCasePrompt = lowerCasePrompt.toLowerCase();
+      if (lowerCasePrompt) {
+        lowerCasePrompt = lowerCasePrompt.toLowerCase();
+      }
       while (!(lowerCasePrompt === "yes" || lowerCasePrompt === "no")) {
         window.alert("Please enter a valid response.");
         lowerCasePrompt = prompt('Would you like to use lowercase letters in your password? Enter "yes" or "no".');
@@ -61,7 +65,9 @@ function writePassword() {
 
     function getNumber() {
       var numberPrompt = prompt('Would you like to use numbers in your password? Enter "yes" or "no".');
-      numberPrompt = numberPrompt.toLowerCase();
+      if (numberPrompt) {
+        numberPrompt = numberPrompt.toLowerCase();
+      }
       while (!(numberPrompt === "yes" || numberPrompt === "no")) {
         window.alert("Please enter a valid response.");
         numberPrompt = prompt('Would you like to use numbers in your password? Enter "yes" or "no".');
@@ -72,7 +78,9 @@ function writePassword() {
 
     function getSpecialChar() {
       var specialCharPrompt = prompt('Would you like to use special characters in your password? Enter "yes" or "no".');
-      specialCharPrompt = specialCharPrompt.toLowerCase();
+      if (specialCharPrompt) {
+        specialCharPrompt = specialCharPrompt.toLowerCase();
+      }
       while (!(specialCharPrompt === "yes" || specialCharPrompt === "no")) {
         window.alert("Please enter a valid response.");
         specialCharPrompt = prompt('Would you like to use special characters in your password? Enter "yes" or "no".');
