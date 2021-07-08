@@ -14,33 +14,74 @@ var characters = {
   ]
 };
 
-// user input variables
-var getPasswordLength = function() { 
-  var passwordLength = prompt("How many characters would you like your password to be?");
-  passwordLength = parseInt(passwordLength);
-  while (!(passwordLength >= 8 && passwordLength <= 128)) {
-    window.alert("Please enter a number between 8 and 128.");
-    passwordLength = prompt("How many characters would you like your password to be?");
-    passwordLength = parseInt(passwordLength);
-  }
-  return passwordLength;
-};
-
-var userInput = {
-  length: getPasswordLength(),
-  upperCaseConfirm: window.confirm("Would you like to use upper case letters in your password?"),
-  lowerCaseConfirm: window.confirm("Would you like to use lower case letters in your password?"),
-  numberConfirm: window.confirm("Would you like to use numbers in your password?"),
-  specialCharConfirm: window.confirm("Would you like to use special characters in your password?")
-}
-
 
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
-
 // Write password to the #password input
 function writePassword() {
+  // function to take user input
+  function userInputFunction() {
+    // function to take desired password length
+    function getPasswordLength() {
+      var passwordLength = prompt("How many characters would you like your password to be?");
+      passwordLength = parseInt(passwordLength);
+    while (!(passwordLength >= 8 && passwordLength <= 128)) {
+      window.alert("Please enter a number between 8 and 128.");
+      passwordLength = prompt("How many characters would you like your password to be?");
+      passwordLength = parseInt(passwordLength);
+    }
+    return passwordLength;
+    };
+    // user Input object
+    var userInputQuestions = {
+      length: getPasswordLength(),
+      upperCaseConfirm: window.confirm("Would you like to use upper case letters in your password?"),
+      lowerCaseConfirm: window.confirm("Would you like to use lower case letters in your password?"),
+      numberConfirm: window.confirm("Would you like to use numbers in your password?"),
+      specialCharConfirm: window.confirm("Would you like to use special characters in your password?")
+    };
+    // function will return userInput
+    return userInputQuestions;
+  };
+
+  // create password from userInput
+  function generatePassword() {
+
+    // hold the answers to user input questions in a variable
+    var userInputAnswers = userInputFunction();
+
+    // array to hold characters user wants in password
+    var userChars = [];
+
+    if (userInputAnswers.upperCaseConfirm === true) {
+      // iterate through upper case array and add indices to userChars
+      for (let i = 0; i < characters.upperCase.length; i++) {
+        userChars.push(characters.upperCase[i]);
+      }
+    }
+
+    if (userInputAnswers.lowerCaseConfirm === true) {
+      for (let i = 0; i < characters.lowerCase.length; i++) {
+        userChars.push(characters.lowerCase[i]);
+      }
+    }
+
+    if (userInputAnswers.numberConfirm === true) {
+      for (let i = 0; i < characters.number.length; i++) {
+        userChars.push(characters.number[i]);
+      }
+    }
+
+    if (userInputAnswers.specialCharConfirm === true) {
+      for (let i = 0; i < characters.specialChar.length; i++) {
+        userChars.push(characters.specialChar[i]);
+      }
+    }
+    userChars = userChars.join("");
+    return userChars;
+  }
+  
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
