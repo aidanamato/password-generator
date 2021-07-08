@@ -18,8 +18,10 @@ var characters = {
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
+
 // Write password to the #password input
 function writePassword() {
+  
   // function to take user input
   function userInputFunction() {
     // function to take desired password length
@@ -40,10 +42,11 @@ function writePassword() {
       lowerCaseConfirm: window.confirm("Would you like to use lower case letters in your password?"),
       numberConfirm: window.confirm("Would you like to use numbers in your password?"),
       specialCharConfirm: window.confirm("Would you like to use special characters in your password?")
-    };
+    }
+
     // function will return userInput
     return userInputQuestions;
-  };
+  }
 
   // create password from userInput
   function generatePassword() {
@@ -90,7 +93,6 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
