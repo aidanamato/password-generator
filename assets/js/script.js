@@ -78,8 +78,12 @@ function writePassword() {
         userChars.push(characters.specialChar[i]);
       }
     }
-    userChars = userChars.join("");
-    return userChars;
+    var userPassword = "";
+    // randomly select characters from userChars array to be put into the password
+    for (let i = 0; i < userInputAnswers.length; i++) {
+      userPassword = userPassword + userChars[Math.floor(Math.random() * userChars.length)];
+    }
+    return userPassword;
   }
   
   var password = generatePassword();
