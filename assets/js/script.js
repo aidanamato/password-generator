@@ -102,58 +102,106 @@ function writePassword() {
       lowerCaseConfirm: getLowerCase(),
       numberConfirm: getNumber(),
       specialCharConfirm: getSpecialChar()
-    }
+    };
 
-    // function will return userInput
+    // function will return userInputQuestions object
     return userInputQuestions;
   }
 
-  // create password from userInput
-  function generatePassword() {
+  // hold the answers to user input questions in a variable
+  var userInputAnswers = userInputFunction();
 
-    // hold the answers to user input questions in a variable
-    var userInputAnswers = userInputFunction();
-
-    // array to hold characters user wants in password
-    var userChars = [];
-
-    if (userInputAnswers.upperCaseConfirm === "yes") {
-      // iterate through upper case array and add indices to userChars
-      for (let i = 0; i < characters.upperCase.length; i++) {
-        userChars.push(characters.upperCase[i]);
+  var userInputValidate = {
+    upperCaseValidate: function() {
+      if (userInputAnswers.upperCaseConfirm === "yes") {
+        var validateMessage = "Upper Case\n";
+      } else {
+        var validateMessage = "";
       }
-    }
-
-    if (userInputAnswers.lowerCaseConfirm === "yes") {
-      for (let i = 0; i < characters.lowerCase.length; i++) {
-        userChars.push(characters.lowerCase[i]);
+      return validateMessage;
+    },
+    lowerCaseValidate: function() {
+      if (userInputAnswers.lowerCaseConfirm === "yes") {
+        var validateMessage = "Lower Case\n";
+      } else {
+        var validateMessage = "";
       }
-    }
-
-    if (userInputAnswers.numberConfirm === "yes") {
-      for (let i = 0; i < characters.number.length; i++) {
-        userChars.push(characters.number[i]);
+      return validateMessage;
+    },
+    numberValidate: function() {
+      if (userInputAnswers.numberConfirm === "yes") {
+        var validateMessage = "Numbers\n";
+      } else {
+        var validateMessage = "";
       }
-    }
-
-    if (userInputAnswers.specialCharConfirm === "yes") {
-      for (let i = 0; i < characters.specialChar.length; i++) {
-        userChars.push(characters.specialChar[i]);
+      return validateMessage;
+    },
+    specialCharValidate: function(){
+      if (userInputAnswers.specialCharConfirm === "yes") {
+        var validateMessage = "Special Characters\n";
+      } else {
+        var validateMessage = "";
       }
+      return validateMessage;
     }
+  };
 
-    var userPassword = "";
-    // randomly select characters from userChars array to be put into the password
-    for (let i = 0; i < userInputAnswers.length; i++) {
-      userPassword = userPassword + userChars[Math.floor(Math.random() * userChars.length)];
+  var validateConfirm = confirm(
+    "You chose a password with " + userInputAnswers.length + " characters of the following types:\n" +
+    userInputValidate.upperCaseValidate() + userInputValidate.lowerCaseValidate() + userInputValidate.numberValidate() + userInputValidate.specialCharValidate() + "Is this correct?"
+  )
+
+  if (validateConfirm) {
+    // create password from userInput
+    function generatePassword() {
+      
+      // array to hold characters user wants in password
+      var userChars = [];
+
+      if (userInputAnswers.upperCaseConfirm === "yes") {
+        // iterate through upper case array and add indices to userChars
+        for (let i = 0; i < characters.upperCase.length; i++) {
+          userChars.push(characters.upperCase[i]);
+        }
+      }
+
+      if (userInputAnswers.lowerCaseConfirm === "yes") {
+        for (let i = 0; i < characters.lowerCase.length; i++) {
+          userChars.push(characters.lowerCase[i]);
+        }
+      }
+
+      if (userInputAnswers.numberConfirm === "yes") {
+        for (let i = 0; i < characters.number.length; i++) {
+          userChars.push(characters.number[i]);
+        }
+      }
+
+      if (userInputAnswers.specialCharConfirm === "yes") {
+        for (let i = 0; i < characters.specialChar.length; i++) {
+          userChars.push(characters.specialChar[i]);
+        }
+      }
+
+      var userPassword = "";
+      // randomly select characters from userChars array to be put into the password
+      for (let i = 0; i < userInputAnswers.length; i++) {
+        userPassword = userPassword + userChars[Math.floor(Math.random() * userChars.length)];
+      }
+      return userPassword;
     }
-    return userPassword;
+    
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+
+    passwordText.value = password;
+  } 
+  else {
+    var tryAgain = confirm("Would you like to try again?")
+    if (tryAgain) {
+      writePassword();
+    } 
   }
-  
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
 }
 
 // Add event listener to generate button
